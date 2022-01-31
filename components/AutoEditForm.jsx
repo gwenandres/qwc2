@@ -35,7 +35,6 @@ export default class AutoEditForm extends React.Component {
         );
     }
     renderField = (field) => {
-        const multiline = (field.constraints || {}).multiline;
         const constraints = omit(field.constraints || {}, ["multiline"]);
         let value = (this.props.values || {})[field.id];
         if (value === undefined || value === null) {
@@ -86,7 +85,7 @@ export default class AutoEditForm extends React.Component {
                 </span>
             );
         } else if (field.type === "text") {
-            if (multiline) {
+            if (constraints.multiline) {
                 if (constraints.readOnly && constraints.usehtml) {
                    input = (
                         <div className="html-text" dangerouslySetInnerHTML={{__html: value}}/>
