@@ -82,7 +82,7 @@ class Editing extends React.Component {
         this.props.setSnappingConfig(this.props.snapping, this.props.snappingActive);
     }
     onHide = () => {
-        this.props.changeEditingState({action: null, geomType: null, feature: null});
+        this.props.changeEditingState({action: null, geomType: null, feature: null, geomReadOnly: null});
         this.setLayerVisibility(this.state.selectedLayer, this.state.selectedLayerVisibility);
         this.setState({minimized: false, drawPick: false, drawPickResults: null});
     }
@@ -110,8 +110,10 @@ class Editing extends React.Component {
                 this.props.iface.getFeature(this.editLayerId(this.state.selectedLayer), newPoint.coordinate, this.props.map.projection, scale, 96, (featureCollection) => {
                     const features = featureCollection ? featureCollection.features : null;
                     this.setState({pickedFeatures: features});
+										const curConfig = this.props.theme && this.props.theme.editConfig && this.state.selectedLayer ? this.props.theme.editConfig[this.state.selectedLayer] : null;
+										const geomReadOnly = this.hasNonNullZ(feature) | curConfig.geomReadOnly;
                     const feature = features ? features[0] : null;
-                    this.props.changeEditingState({...this.props.editing, feature: feature, geomReadOnly: this.hasNonNullZ(feature), changed: false});
+                    this.props.changeEditingState({...this.props.editing, feature: feature, geomReadOnly: geomReadOnly, changed: false});
 
                     // Query relation values for picked feature
                     const editDataset = this.editLayerId(this.state.selectedLayer);
@@ -354,7 +356,8 @@ class Editing extends React.Component {
     }
     changeSelectedLayer = (selectedLayer, action = null, feature = null) => {
         const curConfig = this.props.theme && this.props.theme.editConfig && selectedLayer ? this.props.theme.editConfig[selectedLayer] : null;
-        this.props.changeEditingState({...this.props.editing, action: action || (this.state.drawPick ? "Draw" : this.props.editing.action), feature: feature, geomType: curConfig ? curConfig.geomType : null});
+				const geomReadOnly = curConfig.geomReadOnly || false;
+        this.props.changeEditingState({...this.props.editing, action: action || (this.state.drawPick ? "Draw" : this.props.editing.action), feature: feature, geomType: curConfig ? curConfig.geomType : null, geomReadOnly : geomReadOnly});
 
         let prevLayerVisibility = null;
         if (this.state.selectedLayer !== null) {
@@ -590,7 +593,9 @@ class Editing extends React.Component {
     }
     setEditFeature = (featureId) => {
         const feature = this.state.pickedFeatures.find(f => f.id.toString() === featureId);
-        this.props.changeEditingState({...this.props.editing, feature: feature, geomReadOnly: this.hasNonNullZ(feature), changed: false});
+				const curConfig = this.props.theme && this.props.theme.editConfig && this.state.selectedLayer ? this.props.theme.editConfig[this.state.selectedLayer] : null;
+				const geomReadOnly = this.hasNonNullZ(feature) | curConfig.geomReadOnly;
+        this.props.changeEditingState({...this.props.editing, feature: feature, geomReadOnly: geomReadOnly, changed: false});
     }
     toggleDrawPick = () => {
         const pickActive = !this.state.drawPick;
