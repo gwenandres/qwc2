@@ -122,6 +122,7 @@
       "title": "Informace o prvku"
     },
     "importlayer": {
+      "addfailed": "",
       "addlayer": "Přidat vrstvu",
       "connect": "Připojit",
       "filter": "Filtr...",
@@ -280,6 +281,10 @@
       "showpin": "",
       "socialIntro": "Ve vaší oblíbené sociální síti"
     },
+    "snapping": {
+      "loading": "",
+      "snappingenabled": ""
+    },
     "themelayerslist": {
       "addlayer": "",
       "addlayerstotheme": "",
@@ -300,6 +305,7 @@
     },
     "timemanager": {
       "animationinterval": "",
+      "markers": "",
       "notemporaldata": "",
       "play": "",
       "rewind": "",

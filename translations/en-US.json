@@ -122,6 +122,7 @@
       "title": "Feature Info"
     },
     "importlayer": {
+      "addfailed": "Failed to add layer.",
       "addlayer": "Add layer",
       "connect": "Connect",
       "filter": "Filter...",
@@ -280,6 +281,10 @@
       "showpin": "Show pin",
       "socialIntro": "In your favourite social network"
     },
+    "snapping": {
+      "loading": "Loading snapping geometries...",
+      "snappingenabled": "Snapping enabled"
+    },
     "themelayerslist": {
       "addlayer": "Add layer",
       "addlayerstotheme": "Add layers to current map",
@@ -300,6 +305,7 @@
     },
     "timemanager": {
       "animationinterval": "Animation interval",
+      "markers": "Markers",
       "notemporaldata": "No temporal layers are visible in the map.",
       "play": "Play",
       "rewind": "Rewind",

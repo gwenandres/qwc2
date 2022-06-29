@@ -40,7 +40,10 @@ class OlLayer extends React.Component {
         const oldOptions = this.makeOptions(prevProps.options);
 
         this.updateLayer(newOptions, oldOptions);
-        this.state.layer.setVisible(this.state.layer.get("empty") !== true && newOptions.visibility);
+        // WMS layer handles visibility separately
+        if (newOptions.type !== "wms") {
+            this.state.layer.setVisible(newOptions.visibility);
+        }
         this.state.layer.setOpacity(newOptions.opacity / 255.0);
         this.state.layer.setZIndex(newOptions.zIndex);
 
@@ -147,7 +150,7 @@ class OlLayer extends React.Component {
             sublayers[options.id] = layer;
         }
         Object.entries(sublayers).map(([id, sublayer]) => {
-            if (!sublayer.getTileLoadFunction) {
+            if (sublayer.getSource() && sublayer.getSource().getImageLoadFunction) {
                 sublayer.getSource().on('imageloadstart', () => {
                     this.props.setLayerLoading(id, true);
                 });
@@ -157,7 +160,7 @@ class OlLayer extends React.Component {
                 sublayer.getSource().on('imageloaderror', () => {
                     this.props.setLayerLoading(id, false);
                 });
-            } else {
+            } else if (sublayer.getSource() && sublayer.getSource().getTileLoadFunction) {
                 sublayer.getSource().on('tileloadstart', () => {
                     if (this.tilestoload === 0) {
                         this.props.setLayerLoading(id, true);

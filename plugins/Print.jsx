@@ -114,7 +114,7 @@ class Print extends React.Component {
         const formvisibility = 'hidden';
         const printDpi = parseInt(this.state.dpi, 10);
         const mapCrs = this.props.map.projection;
-        const version = this.props.theme.version || "1.3.0";
+        const version = this.props.theme.version;
 
         const mapName = this.state.layout.map.name;
         const printParams = LayerUtils.collectPrintParams(this.props.layers, this.props.theme, this.state.scale, mapCrs, this.props.printExternalLayers);
@@ -164,6 +164,17 @@ class Print extends React.Component {
         const labels = this.state.layout && this.state.layout.labels ? this.state.layout.labels : [];
 
         const highlightParams = VectorLayerUtils.createPrintHighlighParams(this.props.layers, mapCrs, printDpi, this.props.scaleFactor);
+
+        const dimensionValues = this.props.layers.reduce((res, layer) => {
+            if (layer.role === LayerRole.THEME) {
+                Object.entries(layer.dimensionValues || {}).forEach(([key, value]) => {
+                    if (value !== undefined) {
+                        res[key] = value;
+                    }
+                });
+            }
+            return res;
+        }, {});
 
         return (
             <div className="print-body">
@@ -252,12 +263,11 @@ class Print extends React.Component {
                         <input name="csrf_token" type="hidden" value={MiscUtils.getCsrfToken()} />
                         <input name={mapName + ":extent"} readOnly type={formvisibility} value={extent || ""} />
                         <input name="SERVICE" readOnly type={formvisibility} value="WMS" />
-                        <input name="VERSION" readOnly type={formvisibility} value={version || "1.3.0"} />
+                        <input name="VERSION" readOnly type={formvisibility} value={version} />
                         <input name="REQUEST" readOnly type={formvisibility} value="GetPrint" />
                         <input name="FORMAT" readOnly type={formvisibility} value="pdf" />
                         <input name="TRANSPARENT" readOnly type={formvisibility} value="true" />
                         <input name="SRS" readOnly type={formvisibility} value={mapCrs} />
-                        {!isEmpty(themeLayers) && themeLayers[0].params.MAP ? (<input name="MAP" readOnly type={formvisibility} value={themeLayers[0].params.MAP} />) : null}
                         {Object.entries(printParams).map(([key, value]) => (<input key={key} name={key} type={formvisibility} value={value} />))}
                         <input name="CONTENT_DISPOSITION" readOnly type={formvisibility} value={this.props.inlinePrintOutput ? "inline" : "attachment"} />
                         <input name={mapName + ":LAYERS"} readOnly type={formvisibility} value={printParams.LAYERS} />
@@ -271,6 +281,9 @@ class Print extends React.Component {
                         {gridIntervalX}
                         {gridIntervalY}
                         {resolutionInput}
+                        {Object.entries(dimensionValues).map(([key, value]) => (
+                            <input key={key} name={key} readOnly type="hidden" value={value} />
+                        ))}
                     </div>
                     <div className="button-bar">
                         <button className="button" disabled={!printParams.LAYERS || this.state.printing} type="submit">

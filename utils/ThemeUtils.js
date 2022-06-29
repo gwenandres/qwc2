@@ -7,6 +7,7 @@
  */
 
 import isEmpty from 'lodash.isempty';
+import url from 'url';
 
 import ConfigUtils from '../utils/ConfigUtils';
 import LayerUtils from '../utils/LayerUtils';
@@ -50,12 +51,17 @@ const ThemeUtils = {
                     visibility: false,
                     opacity: bgLayer.opacity !== undefined ? bgLayer.opacity : 255
                 };
-                if (bgLayer.type === "group") {
+                if (bgLayer.type === "wms") {
+                    bgLayer.version = bgLayer.params.VERSION || bgLayer.version || themes.defaultWMSVersion || "1.3.0";
+                } else if (bgLayer.type === "group") {
                     bgLayer.items = bgLayer.items.map(item => {
                         if (item.ref) {
                             const sublayer = themes.backgroundLayers.find(l => l.name === item.ref);
                             if (sublayer) {
                                 item = {...item, ...sublayer, ...LayerUtils.buildWMSLayerParams(sublayer)};
+                                if (item.type === "wms") {
+                                    item.version = item.params.VERSION || item.version || themes.defaultWMSVersion || "1.3.0";
+                                }
                                 delete item.ref;
                             } else {
                                 item = null;
@@ -78,10 +84,18 @@ const ThemeUtils = {
         return bgLayers;
     },
     createThemeLayer(theme, themes, role = LayerRole.THEME, subLayers = []) {
+        const urlParts = url.parse(theme.url, true);
+        // Resolve relative urls
+        if (!urlParts.host) {
+            const locationParts = url.parse(window.location.href);
+            urlParts.protocol = locationParts.protocol;
+            urlParts.host = locationParts.host;
+        }
+        const baseParams = urlParts.query;
         const layer = {
             type: "wms",
-            url: ThemeUtils.fullUrl(theme.url),
-            version: theme.version,
+            url: url.format(urlParts),
+            version: theme.version || themes.defaultWMSVersion || "1.3.0",
             visibility: true,
             expanded: theme.expanded,
             name: theme.name,
@@ -94,9 +108,9 @@ const ThemeUtils = {
             format: theme.format,
             role: role,
             attribution: theme.attribution,
-            legendUrl: ThemeUtils.fullUrl(theme.legendUrl),
-            printUrl: ThemeUtils.fullUrl(theme.printUrl),
-            featureInfoUrl: ThemeUtils.fullUrl(theme.featureInfoUrl),
+            legendUrl: ThemeUtils.inheritBaseUrlParams(theme.legendUrl, theme.url, baseParams),
+            printUrl: ThemeUtils.inheritBaseUrlParams(theme.printUrl, theme.url, baseParams),
+            featureInfoUrl: ThemeUtils.inheritBaseUrlParams(theme.featureInfoUrl, theme.url, baseParams),
             infoFormats: theme.infoFormats,
             externalLayerMap: {
                 ...theme.externalLayerMap,
@@ -114,6 +128,17 @@ const ThemeUtils = {
             layer.drawingOrder = theme.drawingOrder;
         }
         return layer;
+    },
+    inheritBaseUrlParams(capabilityUrl, baseUrl, baseParams) {
+        if (!capabilityUrl) {
+            return baseUrl;
+        }
+        if (capabilityUrl.split("?")[0] === baseUrl.split("?")[0]) {
+            const parts = url.parse(capabilityUrl, true);
+            parts.query = {...baseParams, ...parts.query};
+            return url.format(parts);
+        }
+        return capabilityUrl;
     },
     searchThemes(themes, searchtext, resultType) {
         const filter = new RegExp(removeDiacritics(searchtext).replace(/[-[\]/{}()*+?.\\^$|]/g, "\\$&"), "i");
@@ -138,15 +163,6 @@ const ThemeUtils = {
             return removeDiacritics(item.title).match(filter) || removeDiacritics(item.keywords || "").match(filter) || removeDiacritics(item.abstract || "").match(filter);
         }));
         return matches;
-    },
-    fullUrl(url) {
-        if (!url || url.startsWith('http')) {
-            // keep original URL
-            return url;
-        } else {
-            // full URL for relative URL on current location
-            return new URL(url, window.location.href).href;
-        }
     }
 };
 

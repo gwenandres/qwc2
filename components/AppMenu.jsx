@@ -11,10 +11,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {remove as removeDiacritics} from 'diacritics';
 import isEmpty from 'lodash.isempty';
-import {Swipeable} from './Swipeable';
 import {setCurrentTask} from '../actions/task';
 import LocaleUtils from '../utils/LocaleUtils';
 import ConfigUtils from '../utils/ConfigUtils';
+import MiscUtils from '../utils/MiscUtils';
 import Icon from './Icon';
 import './style/AppMenu.css';
 
@@ -148,30 +148,28 @@ class AppMenu extends React.Component {
         }
         const filter = removeDiacritics(this.state.filter.toLowerCase());
         return (
-            <div className={"AppMenu " + className} ref={el => { this.menuEl = el; }}
+            <div className={"AppMenu " + className} ref={el => { this.menuEl = el; MiscUtils.setupKillTouchEvents(el); }}
             >
-                <div className="appmenu-button-container" onMouseDown={this.toggleMenu}>
+                <div className="appmenu-button-container" onMouseDown={this.toggleMenu} >
                     {this.props.buttonContents}
                 </div>
-                <Swipeable onSwipedUp={this.toggleMenu} stopPropagation>
-                    <div className="appmenu-menu-container">
-                        <ul className="appmenu-menu">
-                            {this.props.showFilterField ? (
-                                <li className="appmenu-leaf">
-                                    <Icon icon={"search"} size="xlarge"/>
-                                    <div className="appmenu-filter">
-                                        <input onChange={ev => this.setState({filter: ev.target.value})}
-                                            placeholder={LocaleUtils.tr("appmenu.filter")} ref={el => {this.filterfield = el; }}
-                                            type="text"
-                                            value={this.state.filter}/>
-                                        <Icon icon="remove" onClick={() => this.setState({filter: ""})} />
-                                    </div>
-                                </li>
-                            ) : null}
-                            {this.renderMenuItems(this.props.menuItems, 0, filter)}
-                        </ul>
-                    </div>
-                </Swipeable>
+                <div className="appmenu-menu-container">
+                    <ul className="appmenu-menu">
+                        {this.props.showFilterField ? (
+                            <li className="appmenu-leaf">
+                                <Icon icon={"search"} size="xlarge"/>
+                                <div className="appmenu-filter">
+                                    <input onChange={ev => this.setState({filter: ev.target.value})}
+                                        placeholder={LocaleUtils.tr("appmenu.filter")} ref={el => {this.filterfield = el; }}
+                                        type="text"
+                                        value={this.state.filter}/>
+                                    <Icon icon="remove" onClick={() => this.setState({filter: ""})} />
+                                </div>
+                            </li>
+                        ) : null}
+                        {this.renderMenuItems(this.props.menuItems, 0, filter)}
+                    </ul>
+                </div>
             </div>
         );
     }

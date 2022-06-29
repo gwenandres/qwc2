@@ -27,6 +27,7 @@ import ConfigUtils from '../utils/ConfigUtils';
 import LayerUtils from '../utils/LayerUtils';
 import LocaleUtils from '../utils/LocaleUtils';
 import MapUtils from '../utils/MapUtils';
+import MiscUtils from '../utils/MiscUtils';
 import VectorLayerUtils from '../utils/VectorLayerUtils';
 import './style/LayerTree.css';
 
@@ -265,7 +266,9 @@ class LayerTree extends React.Component {
                     <div className="layertree-item-edit-items">
                         {zoomToLayerButton}
                         {this.props.transparencyIcon ? (<Icon icon="transparency" />) : LocaleUtils.tr("layertree.transparency")}
-                        <input className="layertree-item-transparency-slider" defaultValue={255 - sublayer.opacity} max="255" min="0" onMouseUp={(ev) => this.layerTransparencyChanged(layer, path, ev.target.value)} onTouchEnd={(ev) => this.layerTransparencyChanged(layer, path, ev.target.value)} step="1" type="range" />
+                        <input className="layertree-item-transparency-slider" max="255" min="0"
+                            onChange={(ev) => this.layerTransparencyChanged(layer, path, ev.target.value)}
+                            step="1" type="range" value={255 - sublayer.opacity} />
                         {reorderButtons}
                         {this.props.infoInSettings ? infoButton : null}
                         {layer.type === 'vector' ? (<Icon icon="export" onClick={() => this.exportRedliningLayer(layer)} />) : null}
@@ -380,10 +383,25 @@ class LayerTree extends React.Component {
             <div className="layertree-container-wrapper" role="body">
                 <div className="layertree-container">
                     <div className="layertree-tree"
-                        onContextMenuCapture={ev => {ev.stopPropagation(); ev.preventDefault(); return false; }}
-                        onTouchEnd={ev => { ev.stopPropagation(); }}
-                        onTouchMove={ev => { ev.stopPropagation(); }}
-                        onTouchStart={ev => { ev.stopPropagation(); }}>
+                        onContextMenuCapture={ev => {
+                            // Prevent context menu on drag-sort
+                            ev.stopPropagation(); ev.preventDefault(); return false;
+                        }}
+                        onTouchEnd={ev => {
+                            const target = ev.currentTarget;
+                            clearTimeout(target.preventScrollTimeout);
+                            target.preventScrollTimeout = null;
+                            target.removeEventListener("touchmove", MiscUtils.killEvent);
+                        }}
+                        onTouchStart={ev => {
+                            // Prevent touch-scroll after sortable trigger delay
+                            const target = ev.currentTarget;
+                            target.preventScrollTimeout = setTimeout(() => {
+                                target.addEventListener("touchmove", MiscUtils.killEvent, {passive: false});
+                            }, 200);
+                        }}
+                        ref={MiscUtils.setupKillTouchEvents}
+                    >
                         <Sortable onChange={this.onSortChange} options={{disabled: sortable === false, ghostClass: 'drop-ghost', delay: 200, forceFallback: this.props.fallbackDrag}}>
                             {this.props.layers.map(this.renderLayerTree)}
                         </Sortable>
@@ -548,15 +566,19 @@ class LayerTree extends React.Component {
     printLayerLegend = (layer, sublayer) => {
         let body = "";
         if (sublayer.sublayers) {
-            body = '<div class="legend-group">' +
-                   '<h3 class="legend-group-title">' + (sublayer.title || sublayer.name) + '</h3>' +
-                   '<div class="legend-group-body">' +
-                   sublayer.sublayers.map(subsublayer => this.printLayerLegend(layer, subsublayer)).join("\n") +
-                   '</div>' +
-                   '</div>';
+            if (sublayer.visibility) {
+                body = '<div class="legend-group">' +
+                       '<h3 class="legend-group-title">' + (sublayer.title || sublayer.name) + '</h3>' +
+                       '<div class="legend-group-body">' +
+                       sublayer.sublayers.map(subsublayer => this.printLayerLegend(layer, subsublayer)).join("\n") +
+                       '</div>' +
+                       '</div>';
+            }
         } else {
-            const request = LayerUtils.getLegendUrl(layer, {name: sublayer.name}, this.props.mapScale, this.props.map, this.props.bboxDependentLegend, this.props.scaleDependentLegend);
-            body = request ? '<div class="legend-entry"><img src="' + request + '" /></div>' : "";
+            if (sublayer.visibility && LayerUtils.layerScaleInRange(sublayer, this.props.mapScale)) {
+                const request = LayerUtils.getLegendUrl(layer, {name: sublayer.name}, this.props.mapScale, this.props.map, this.props.bboxDependentLegend, this.props.scaleDependentLegend);
+                body = request ? '<div class="legend-entry"><img src="' + request + '" /></div>' : "";
+            }
         }
         return body;
     }

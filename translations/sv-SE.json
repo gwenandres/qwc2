@@ -122,6 +122,7 @@
       "title": "Objektinformation"
     },
     "importlayer": {
+      "addfailed": "",
       "addlayer": "Lägg till lager",
       "connect": "Anslut",
       "filter": "Filter...",
@@ -280,6 +281,10 @@
       "showpin": "",
       "socialIntro": "I ditt favoritnätverk"
     },
+    "snapping": {
+      "loading": "",
+      "snappingenabled": ""
+    },
     "themelayerslist": {
       "addlayer": "",
       "addlayerstotheme": "",
@@ -300,6 +305,7 @@
     },
     "timemanager": {
       "animationinterval": "",
+      "markers": "",
       "notemporaldata": "",
       "play": "",
       "rewind": "",

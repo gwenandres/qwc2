@@ -122,6 +122,7 @@
       "title": "Información de recurso"
     },
     "importlayer": {
+      "addfailed": "",
       "addlayer": "Adicionar camada",
       "connect": "Ligar",
       "filter": "Filtro...",
@@ -280,6 +281,10 @@
       "showpin": "",
       "socialIntro": "Na sua rede social favorita"
     },
+    "snapping": {
+      "loading": "",
+      "snappingenabled": ""
+    },
     "themelayerslist": {
       "addlayer": "Adicionar camada",
       "addlayerstotheme": "Adicionar camadas ao mapa atual",
@@ -300,6 +305,7 @@
     },
     "timemanager": {
       "animationinterval": "",
+      "markers": "",
       "notemporaldata": "",
       "play": "",
       "rewind": "",

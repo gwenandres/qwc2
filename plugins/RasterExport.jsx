@@ -44,8 +44,7 @@ class RasterExport extends React.Component {
         this.setState({dpi: parseInt(ev.target.value, 10)});
     }
     renderBody = () => {
-        const themeLayers = this.props.layers.filter(layer => layer.role === LayerRole.THEME);
-        if (!this.props.theme || !themeLayers) {
+        if (!this.props.theme) {
             return null;
         }
         const formatMap = {
@@ -83,6 +82,16 @@ class RasterExport extends React.Component {
         // Local vector layer features
         const mapCrs = this.props.map.projection;
         const highlightParams = VectorLayerUtils.createPrintHighlighParams(this.props.layers, mapCrs, this.state.dpi);
+        const dimensionValues = this.props.layers.reduce((res, layer) => {
+            if (layer.role === LayerRole.THEME) {
+                Object.entries(layer.dimensionValues || {}).forEach(([key, value]) => {
+                    if (value !== undefined) {
+                        res[key] = value;
+                    }
+                });
+            }
+            return res;
+        }, {});
 
         return (
             <span>
@@ -104,7 +113,7 @@ class RasterExport extends React.Component {
                         {dpiSelector}
                     </div>
                     <input name="SERVICE" readOnly type="hidden" value="WMS" />
-                    <input name="VERSION" readOnly type="hidden" value={themeLayers[0].version || "1.3.0"} />
+                    <input name="VERSION" readOnly type="hidden" value={this.props.theme.version} />
                     <input name="REQUEST" readOnly type="hidden" value="GetMap" />
                     {Object.entries(exportParams).map(([key, value]) => (<input key={key} name={key} type="hidden" value={value} />))}
                     <input name="TRANSPARENT" readOnly type="hidden" value="true" />
@@ -118,13 +127,16 @@ class RasterExport extends React.Component {
                     {Object.keys(this.props.theme.watermark || {}).map(key => {
                         return (<input key={key} name={"WATERMARK_" + key.toUpperCase()} readOnly type="hidden" value={this.props.theme.watermark[key]} />);
                     })}
-                    <input name={"HIGHLIGHT_GEOM"} readOnly type="hidden" value={highlightParams.geoms.join(";")} />
-                    <input name={"HIGHLIGHT_SYMBOL"} readOnly type="hidden" value={highlightParams.styles.join(";")} />
-                    <input name={"HIGHLIGHT_LABELSTRING"} readOnly type="hidden" value={highlightParams.labels.join(";")} />
-                    <input name={"HIGHLIGHT_LABELCOLOR"} readOnly type="hidden" value={highlightParams.labelFillColors.join(";")} />
-                    <input name={"HIGHLIGHT_LABELBUFFERCOLOR"} readOnly type="hidden" value={highlightParams.labelOultineColors.join(";")} />
-                    <input name={"HIGHLIGHT_LABELBUFFERSIZE"} readOnly type="hidden" value={highlightParams.labelOutlineSizes.join(";")} />
-                    <input name={"HIGHLIGHT_LABELSIZE"} readOnly type="hidden" value={highlightParams.labelSizes.join(";")} />
+                    <input name="HIGHLIGHT_GEOM" readOnly type="hidden" value={highlightParams.geoms.join(";")} />
+                    <input name="HIGHLIGHT_SYMBOL" readOnly type="hidden" value={highlightParams.styles.join(";")} />
+                    <input name="HIGHLIGHT_LABELSTRING" readOnly type="hidden" value={highlightParams.labels.join(";")} />
+                    <input name="HIGHLIGHT_LABELCOLOR" readOnly type="hidden" value={highlightParams.labelFillColors.join(";")} />
+                    <input name="HIGHLIGHT_LABELBUFFERCOLOR" readOnly type="hidden" value={highlightParams.labelOultineColors.join(";")} />
+                    <input name="HIGHLIGHT_LABELBUFFERSIZE" readOnly type="hidden" value={highlightParams.labelOutlineSizes.join(";")} />
+                    <input name="HIGHLIGHT_LABELSIZE" readOnly type="hidden" value={highlightParams.labelSizes.join(";")} />
+                    {Object.entries(dimensionValues).map(([key, value]) => (
+                        <input key={key} name={key} readOnly type="hidden" value={value} />
+                    ))}
                     <input name="csrf_token" type="hidden" value={MiscUtils.getCsrfToken()} />
                 </form>
             </span>
@@ -141,7 +153,7 @@ class RasterExport extends React.Component {
         );
     }
     bboxSelected = (bbox, crs, pixelsize) => {
-        const version = this.props.theme.version || "1.3.0";
+        const version = this.props.theme.version;
         const extent = (CoordinatesUtils.getAxisOrder(crs).substr(0, 2) === 'ne' && version === '1.3.0') ?
             bbox[1] + "," + bbox[0] + "," + bbox[3] + "," + bbox[2] :
             bbox.join(',');

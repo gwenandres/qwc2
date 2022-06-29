@@ -122,6 +122,7 @@
       "title": "Objektinformationen"
     },
     "importlayer": {
+      "addfailed": "Die Ebene konnte nicht hinzugefügt werden",
       "addlayer": "Ebene hinzufügen",
       "connect": "Verbinden",
       "filter": "Filter...",
@@ -280,6 +281,10 @@
       "showpin": "Pin anzeigen",
       "socialIntro": "In den sozialen Medien"
     },
+    "snapping": {
+      "loading": "Einrastrungsgeometrien werden geladen...",
+      "snappingenabled": "Einrasten aktiviert"
+    },
     "themelayerslist": {
       "addlayer": "Layer hinzufügen",
       "addlayerstotheme": "Ebenen der Karte hinzufügen",
@@ -300,6 +305,7 @@
     },
     "timemanager": {
       "animationinterval": "Animationsintervall",
+      "markers": "Marker",
       "notemporaldata": "Keine sichtbare Ebenen in der Karte sind mit Zeitinformationen versehen.",
       "play": "Starten",
       "rewind": "Zurücksetzten",

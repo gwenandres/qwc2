@@ -16,6 +16,15 @@ import CoordinatesUtils from '../../utils/CoordinatesUtils';
 import LocaleUtils from '../../utils/LocaleUtils';
 import MeasureUtils from '../../utils/MeasureUtils';
 
+
+const DrawStyle = new ol.style.Style({
+    image: new ol.style.Circle({
+        fill: new ol.style.Fill({color: '#0099FF'}),
+        stroke: new ol.style.Stroke({color: '#FFFFFF', width: 1.5}),
+        radius: 6
+    })
+});
+
 const measureLabelStyleFactory = () => new ol.style.Text({
     font: '10pt sans-serif',
     text: "",
@@ -93,10 +102,11 @@ class MeasurementSupport extends React.Component {
 
         // create an interaction to draw with
         this.drawInteraction = new ol.interaction.Draw({
+            stopClick: true,
             source: this.measureLayer.getSource(),
             condition: (event) => { return event.originalEvent.buttons === 1; },
             type: geometryType,
-            style: []
+            style: () => { return this.modifyInteraction ? [] : DrawStyle; }
         });
 
         this.drawInteraction.on('drawstart', (ev) => {
@@ -163,7 +173,9 @@ class MeasurementSupport extends React.Component {
             clearTimeout(this.pickPositionCallbackTimeout);
             // Works because style function clears timeout if marker is rendered, i.e. if mouse is over measure geometry
             this.pickPositionCallbackTimeout = setTimeout(() => {
-                this.props.measurement.pickPositionCallback(null);
+                if (this.props.measurement.pickPositionCallback) {
+                    this.props.measurement.pickPositionCallback(null);
+                }
             }, 50);
         }
     }

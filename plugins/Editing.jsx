@@ -17,7 +17,7 @@ import uuid from 'uuid';
 import {changeEditingState} from '../actions/editing';
 import {setCurrentTask, setCurrentTaskBlocked} from '../actions/task';
 import {LayerRole, addLayerFeatures, removeLayer, refreshLayer, changeLayerProperty} from '../actions/layers';
-import {clickOnMap} from '../actions/map';
+import {clickOnMap, setSnappingConfig} from '../actions/map';
 import AutoEditForm from '../components/AutoEditForm';
 import QtDesignerForm from '../components/QtDesignerForm';
 import Icon from '../components/Icon';
@@ -46,7 +46,10 @@ class Editing extends React.Component {
         removeLayer: PropTypes.func,
         setCurrentTask: PropTypes.func,
         setCurrentTaskBlocked: PropTypes.func,
+        setSnappingConfig: PropTypes.func,
         side: PropTypes.string,
+        snapping: PropTypes.bool,
+        snappingActive: PropTypes.bool,
         taskData: PropTypes.object,
         theme: PropTypes.object,
         touchFriendly: PropTypes.bool,
@@ -55,7 +58,9 @@ class Editing extends React.Component {
     static defaultProps = {
         touchFriendly: true,
         width: "30em",
-        side: 'right'
+        side: 'right',
+        snapping: true,
+        snappingActive: true
     }
     state = {
         selectedLayer: null,
@@ -74,6 +79,7 @@ class Editing extends React.Component {
         } else {
             this.changeSelectedLayer(this.state.selectedLayer, "Pick");
         }
+        this.props.setSnappingConfig(this.props.snapping, this.props.snappingActive);
     }
     onHide = () => {
         this.props.changeEditingState({action: null, geomType: null, feature: null});
@@ -698,6 +704,7 @@ export default (iface = EditingInterface) => {
         removeLayer: removeLayer,
         clickOnMap: clickOnMap,
         changeEditingState: changeEditingState,
+        setSnappingConfig: setSnappingConfig,
         setCurrentTask: setCurrentTask,
         setCurrentTaskBlocked: setCurrentTaskBlocked,
         refreshLayer: refreshLayer,
