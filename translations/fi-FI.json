@@ -8,6 +8,7 @@
         "AttributeTable": "",
         "DxfExport": "DXF vienti",
         "Editing": "Editointi",
+        "FeatureForm": "",
         "Help": "Apua",
         "IdentifyRegion": "Tunnista alue",
         "LayerCatalog": "",
@@ -81,15 +82,18 @@
       "symbologyscale": "Symbolien mittakaava"
     },
     "editing": {
+      "add": "",
       "attrtable": "",
       "canceldelete": "Don't delete",
       "capturedpicture": "",
       "clearpicture": "Clear",
       "commit": "Commit",
+      "create": "",
       "delete": "Delete",
       "discard": "Discard",
       "draw": "Draw",
       "feature": "Feature",
+      "geomreadonly": "",
       "maximize": "Maximize",
       "minimize": "Minimize",
       "nocompatpick": "",
@@ -100,6 +104,12 @@
       "relationcommitfailed": "Some relation values could not be committed, check the icon tooltips for details",
       "select": "Select",
       "takepicture": "Take picture"
+    },
+    "featureform": {
+      "feature": "",
+      "noresults": "",
+      "querying": "",
+      "title": ""
     },
     "fileselector": {
       "placeholder": "Valitse tiedosto..."
@@ -162,6 +172,12 @@
       "transparency": "Läpinäkyvyys",
       "visiblefilter": "Suodata näkymättömät tasot",
       "zoomtolayer": "Zoomaa tasolle"
+    },
+    "linkfeatureform": {
+      "cancel": "",
+      "close": "",
+      "drawhint": "",
+      "pickhint": ""
     },
     "locate": {
       "feetUnit": "jalka",
@@ -308,6 +324,7 @@
       "markers": "",
       "notemporaldata": "",
       "play": "",
+      "playrev": "",
       "rewind": "",
       "stepback": "",
       "stepfwd": "",
@@ -316,8 +333,11 @@
       "title": "",
       "toggle": "",
       "unit": {
+        "century": "",
         "days": "",
+        "decade": "",
         "hours": "",
+        "milliseconds": "",
         "minutes": "",
         "months": "",
         "seconds": "",

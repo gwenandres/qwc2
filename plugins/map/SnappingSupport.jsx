@@ -10,6 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import isEmpty from 'lodash.isempty';
 import ol from 'openlayers';
 import uuid from 'uuid';
 import {LayerRole} from '../../actions/layers';
@@ -76,14 +77,15 @@ class SnappingSupport extends React.Component {
         if (!this.state.drawing) {
             return null;
         }
+        const toolbarClass = !this.state.havesnaplayers ? "snapping-toolbar-inactive" : "";
         return (
             <div className="snapping-toolbar-container">
-                <div>
+                <div className={toolbarClass}>
                     <label>
                         {this.state.reqId !== null ? (
                             <Spinner/>
                         ) : (
-                            <input checked={this.props.mapObj.snapping.active} disabled={!this.state.havesnaplayers} onChange={ev => this.props.setSnappingConfig(true, ev.target.checked)} type="checkbox" />
+                            <input checked={this.props.mapObj.snapping.active} onChange={ev => this.props.setSnappingConfig(true, ev.target.checked)} type="checkbox" />
                         )}
                         &nbsp;
                         {this.state.reqId ? LocaleUtils.tr("snapping.loading") : LocaleUtils.tr("snapping.snappingenabled")}
@@ -153,10 +155,10 @@ class SnappingSupport extends React.Component {
             }
             return [...res, cur.name];
         }, []);
+        this.setState({reqId: null, havesnaplayers: !isEmpty(snapLayers)});
         if (snapLayers.length === 0) {
             return;
         }
-        this.setState({reqId: null, havesnaplayers: !!snapLayers});
         if (!this.snapInteraction.getMap() || !this.snapInteraction.getActive()) {
             return;
         }

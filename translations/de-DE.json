@@ -8,6 +8,7 @@
         "AttributeTable": "Attributtabelle",
         "DxfExport": "DXF-Export",
         "Editing": "Editieren",
+        "FeatureForm": "Objektformular",
         "Help": "Hilfe",
         "IdentifyRegion": "Region abfragen",
         "LayerCatalog": "Ebenenkatalog",
@@ -81,15 +82,18 @@
       "symbologyscale": "Darstellungsmaßstab"
     },
     "editing": {
+      "add": "Hinzufügen",
       "attrtable": "Tabelle",
       "canceldelete": "Abbrechen",
       "capturedpicture": "Aufgenommenes Bild",
       "clearpicture": "Zurücksetzen",
       "commit": "Speichern",
+      "create": "Erstellen",
       "delete": "Löschen",
       "discard": "Abbrechen",
       "draw": "Zeichnen",
       "feature": "Objekt",
+      "geomreadonly": "Die Geometrie enthält Z-Werte ungleich Null und kann daher nicht veränderbar.",
       "maximize": "Maximieren",
       "minimize": "Minimieren",
       "nocompatpick": "Keine kompatible Geometrie",
@@ -100,6 +104,12 @@
       "relationcommitfailed": "Einige Relationen konnten nicht gespeichert werden, siehe Tooltips der Icons für mehr Details.",
       "select": "Auswählen",
       "takepicture": "Bild schießen"
+    },
+    "featureform": {
+      "feature": "Objekt",
+      "noresults": "Keine Ergebnisse",
+      "querying": "Objekte werden abgefragt...",
+      "title": "Objektformular"
     },
     "fileselector": {
       "placeholder": "Datei auswählen"
@@ -162,6 +172,12 @@
       "transparency": "Transparenz",
       "visiblefilter": "Unsichtbare Ebenen filtern",
       "zoomtolayer": "Auf den Layer zoomen"
+    },
+    "linkfeatureform": {
+      "cancel": "Abbrechen",
+      "close": "Schliessen",
+      "drawhint": "Objekt auf der Karte zeichnen...",
+      "pickhint": "Objekt auf der Karte auswählen..."
     },
     "locate": {
       "feetUnit": "Fuß",
@@ -283,7 +299,7 @@
     },
     "snapping": {
       "loading": "Einrastrungsgeometrien werden geladen...",
-      "snappingenabled": "Einrasten aktiviert"
+      "snappingenabled": "Einrasten"
     },
     "themelayerslist": {
       "addlayer": "Layer hinzufügen",
@@ -307,7 +323,8 @@
       "animationinterval": "Animationsintervall",
       "markers": "Marker",
       "notemporaldata": "Keine sichtbare Ebenen in der Karte sind mit Zeitinformationen versehen.",
-      "play": "Starten",
+      "play": "Abspielen",
+      "playrev": "Zurück abspielen",
       "rewind": "Zurücksetzten",
       "stepback": "Schritt zurück",
       "stepfwd": "Schritt vorwärts",
@@ -316,8 +333,11 @@
       "title": "Zeitleiste",
       "toggle": "Zeitsteuerung aktivieren",
       "unit": {
+        "century": "Jahrhunderte",
         "days": "Tage",
+        "decade": "Jahrzehnte",
         "hours": "Stunden",
+        "milliseconds": "Millisekunden",
         "minutes": "Minuten",
         "months": "Monate",
         "seconds": "Sekunden",

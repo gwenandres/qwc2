@@ -8,6 +8,7 @@
         "AttributeTable": "Tabella attributi",
         "DxfExport": "Esporta su DXF",
         "Editing": "Strumenti di modifica",
+        "FeatureForm": "Formulario oggetto",
         "Help": "Aiuto",
         "IdentifyRegion": "Identifica in un poligono",
         "LayerCatalog": "Catalogo livelli",
@@ -81,15 +82,18 @@
       "symbologyscale": "Scala per la simbologia"
     },
     "editing": {
+      "add": "Aggiungi",
       "attrtable": "Tabella",
       "canceldelete": "Annulla",
       "capturedpicture": "Foto catturata",
       "clearpicture": "Cancella",
       "commit": "Salva",
+      "create": "Crea",
       "delete": "Elimina",
       "discard": "Annulla",
       "draw": "Disegna",
       "feature": "Oggetto",
+      "geomreadonly": "La geometria contiene valori Z non nulli ed è quindi di sola lettura.",
       "maximize": "Massimizza",
       "minimize": "Minimizza",
       "nocompatpick": "Nessuna geometria compatibile",
@@ -100,6 +104,12 @@
       "relationcommitfailed": "Alcune relazioni non sono state salvate, consultare i tooltip delle icone per i dettagli.",
       "select": "Seleziona...",
       "takepicture": "Foto"
+    },
+    "featureform": {
+      "feature": "Oggetto",
+      "noresults": "Nessun risultato",
+      "querying": "Caricando...",
+      "title": "Formulario oggetto"
     },
     "fileselector": {
       "placeholder": "Seleziona file..."
@@ -162,6 +172,12 @@
       "transparency": "Trasparenza",
       "visiblefilter": "Filtra livelli non visibili",
       "zoomtolayer": "Zoom a tutto il livello"
+    },
+    "linkfeatureform": {
+      "cancel": "Annulla",
+      "close": "Chiudi",
+      "drawhint": "Disegnare l'oggetto sulla mappa...",
+      "pickhint": "Seleziona un oggetto sulla mappa..."
     },
     "locate": {
       "feetUnit": "piedi",
@@ -283,7 +299,7 @@
     },
     "snapping": {
       "loading": "Caricamento delle geometrie per snapping",
-      "snappingenabled": "Snapping attivo"
+      "snappingenabled": "Snapping"
     },
     "themelayerslist": {
       "addlayer": "Aggiungi layer",
@@ -307,7 +323,8 @@
       "animationinterval": "Intervallo animazione",
       "markers": "Marker",
       "notemporaldata": "Nessun layer con dimensioni temporali è attivo nella cartina.",
-      "play": "Avvia animazione",
+      "play": "Anima",
+      "playrev": "Anima indietro",
       "rewind": "Resetta animazione",
       "stepback": "Passo indietro",
       "stepfwd": "Passo avanti",
@@ -316,8 +333,11 @@
       "title": "Linea temporale",
       "toggle": "Abilità gesitone temporale",
       "unit": {
+        "century": "secoli",
         "days": "giorni",
+        "decade": "decenni",
         "hours": "ore",
+        "milliseconds": "millisecondi",
         "minutes": "minuti",
         "months": "mesi",
         "seconds": "secondi",

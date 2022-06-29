@@ -8,6 +8,7 @@
         "AttributeTable": "",
         "DxfExport": "Eksporter DXF",
         "Editing": "Rediger",
+        "FeatureForm": "",
         "Help": "Hjelp",
         "IdentifyRegion": "Identifiser med område",
         "LayerCatalog": "",
@@ -81,15 +82,18 @@
       "symbologyscale": "Symbolskala:"
     },
     "editing": {
+      "add": "",
       "attrtable": "",
       "canceldelete": "Ikke slett",
       "capturedpicture": "",
       "clearpicture": "",
       "commit": "Bekreft",
+      "create": "",
       "delete": "Slett",
       "discard": "Forkast",
       "draw": "Tegn",
       "feature": "Objekt",
+      "geomreadonly": "",
       "maximize": "Maksimer",
       "minimize": "Minimer",
       "nocompatpick": "",
@@ -100,6 +104,12 @@
       "relationcommitfailed": "",
       "select": "Velg",
       "takepicture": ""
+    },
+    "featureform": {
+      "feature": "",
+      "noresults": "",
+      "querying": "",
+      "title": ""
     },
     "fileselector": {
       "placeholder": "Velg fil..."
@@ -162,6 +172,12 @@
       "transparency": "",
       "visiblefilter": "Filtrer usynlige lag",
       "zoomtolayer": "Zoom til lag"
+    },
+    "linkfeatureform": {
+      "cancel": "",
+      "close": "",
+      "drawhint": "",
+      "pickhint": ""
     },
     "locate": {
       "feetUnit": "fot",
@@ -308,6 +324,7 @@
       "markers": "",
       "notemporaldata": "",
       "play": "",
+      "playrev": "",
       "rewind": "",
       "stepback": "",
       "stepfwd": "",
@@ -316,8 +333,11 @@
       "title": "",
       "toggle": "",
       "unit": {
+        "century": "",
         "days": "",
+        "decade": "",
         "hours": "",
+        "milliseconds": "",
         "minutes": "",
         "months": "",
         "seconds": "",

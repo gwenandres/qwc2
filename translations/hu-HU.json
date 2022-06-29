@@ -8,6 +8,7 @@
         "AttributeTable": "",
         "DxfExport": "DXF Exportálás",
         "Editing": "Szerkesztés",
+        "FeatureForm": "",
         "Help": "Segítség",
         "IdentifyRegion": "Adatok lekérdezése",
         "LayerCatalog": "",
@@ -81,15 +82,18 @@
       "symbologyscale": "Jel méretatarány:"
     },
     "editing": {
+      "add": "",
       "attrtable": "",
       "canceldelete": "Ne töröld",
       "capturedpicture": "",
       "clearpicture": "",
       "commit": "Jóváhagyás",
+      "create": "",
       "delete": "Törlés",
       "discard": "Elvetés",
       "draw": "Rajzolás",
       "feature": "",
+      "geomreadonly": "",
       "maximize": "",
       "minimize": "",
       "nocompatpick": "",
@@ -100,6 +104,12 @@
       "relationcommitfailed": "",
       "select": "",
       "takepicture": ""
+    },
+    "featureform": {
+      "feature": "",
+      "noresults": "",
+      "querying": "",
+      "title": ""
     },
     "fileselector": {
       "placeholder": "Fájl választása..."
@@ -162,6 +172,12 @@
       "transparency": "",
       "visiblefilter": "",
       "zoomtolayer": ""
+    },
+    "linkfeatureform": {
+      "cancel": "",
+      "close": "",
+      "drawhint": "",
+      "pickhint": ""
     },
     "locate": {
       "feetUnit": "láb",
@@ -308,6 +324,7 @@
       "markers": "",
       "notemporaldata": "",
       "play": "",
+      "playrev": "",
       "rewind": "",
       "stepback": "",
       "stepfwd": "",
@@ -316,8 +333,11 @@
       "title": "",
       "toggle": "",
       "unit": {
+        "century": "",
         "days": "",
+        "decade": "",
         "hours": "",
+        "milliseconds": "",
         "minutes": "",
         "months": "",
         "seconds": "",

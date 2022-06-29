@@ -8,6 +8,7 @@
         "AttributeTable": "",
         "DxfExport": "Exportar DXF",
         "Editing": "Editant",
+        "FeatureForm": "",
         "Help": "Ajuda",
         "IdentifyRegion": "Identificar zona",
         "LayerCatalog": "Capes",
@@ -81,15 +82,18 @@
       "symbologyscale": "Escala de la simbologia:"
     },
     "editing": {
+      "add": "",
       "attrtable": "",
       "canceldelete": "No esborrar",
       "capturedpicture": "",
       "clearpicture": "Netejar imatge",
       "commit": "Confirmar",
-      "delete": "Esorrar",
+      "create": "",
+      "delete": "Esborrar",
       "discard": "Descartar",
       "draw": "Traçar",
       "feature": "Element",
+      "geomreadonly": "",
       "maximize": "Maximitzar",
       "minimize": "Minimitzar",
       "nocompatpick": "",
@@ -100,6 +104,12 @@
       "relationcommitfailed": "Ha fallat el commit",
       "select": "Seleccionar",
       "takepicture": "Escull imatge"
+    },
+    "featureform": {
+      "feature": "",
+      "noresults": "",
+      "querying": "",
+      "title": ""
     },
     "fileselector": {
       "placeholder": "Selecciona arxiu..."
@@ -162,6 +172,12 @@
       "transparency": "Transparència",
       "visiblefilter": "Filtrar capes no visibles",
       "zoomtolayer": "Zoom a la capa"
+    },
+    "linkfeatureform": {
+      "cancel": "",
+      "close": "",
+      "drawhint": "",
+      "pickhint": ""
     },
     "locate": {
       "feetUnit": "feet",
@@ -277,8 +293,8 @@
     "share": {
       "QRCodeLinkTitle": "Codi QR",
       "directLinkTitle": "Via link",
-      "refresh": "",
-      "showpin": "",
+      "refresh": "Generar l'enllaç permanent",
+      "showpin": "Mostrar el pin",
       "socialIntro": "En la teva xarxa social preferida"
     },
     "snapping": {
@@ -308,6 +324,7 @@
       "markers": "",
       "notemporaldata": "",
       "play": "",
+      "playrev": "",
       "rewind": "",
       "stepback": "",
       "stepfwd": "",
@@ -316,8 +333,11 @@
       "title": "",
       "toggle": "",
       "unit": {
+        "century": "",
         "days": "",
+        "decade": "",
         "hours": "",
+        "milliseconds": "",
         "minutes": "",
         "months": "",
         "seconds": "",

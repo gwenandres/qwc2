@@ -11,6 +11,8 @@ import isEqual from 'lodash.isequal';
 import uuid from 'uuid';
 import url from 'url';
 import ConfigUtils from './ConfigUtils';
+import CoordinatesUtils from './CoordinatesUtils';
+import MapUtils from './MapUtils';
 import {LayerRole} from '../actions/layers';
 
 const LayerUtils = {
@@ -541,6 +543,21 @@ const LayerUtils = {
         }
         return true;
     },
+    computeLayerVisibility(layer) {
+        if (isEmpty(layer.sublayers) || layer.visibility === false) {
+            return layer.visibility ? 1 : 0;
+        }
+        let visible = 0;
+        layer.sublayers.map(sublayer => {
+            const sublayervisibility = sublayer.visibility === undefined ? true : sublayer.visibility;
+            if (sublayer.sublayers && sublayervisibility) {
+                visible += LayerUtils.computeLayerVisibility(sublayer);
+            } else {
+                visible += sublayervisibility ? 1 : 0;
+            }
+        });
+        return visible / layer.sublayers.length;
+    },
     cloneLayer(layer, sublayerpath) {
         const newlayer = {...layer};
         let cur = newlayer;
@@ -756,7 +773,7 @@ const LayerUtils = {
         };
         if (layer.visibility) {
             (layer.dimensions || []).forEach(dimension => {
-                if (dimension.units === "ISO8601") {
+                if (dimension.units === "ISO8601" && dimension.value) {
                     result.names.add(dimension.name);
                     dimension.value.split(/,\s+/).filter(x => x).forEach(x => result.values.add(x));
                     result.attributes[layer.name] = [dimension.fieldName, dimension.endFieldName];
@@ -770,6 +787,48 @@ const LayerUtils = {
             result.attributes = {...result.attributes, ...sublayerResult.attributes};
         });
         return result;
+    },
+    getAttribution(layer, map, showThemeCopyrightOnly = false, transformedbboxes = null) {
+        const copyrights = {};
+        if (!transformedbboxes) {
+            transformedbboxes = {};
+        }
+        if (layer.sublayers && layer.visibility !== false) {
+            Object.assign(
+                copyrights,
+                layer.sublayers.reduce((res, sublayer) => ({...res, ...LayerUtils.getAttribution(sublayer, map, showThemeCopyrightOnly, transformedbboxes)}), {})
+            );
+        }
+        if (!layer.attribution || !layer.attribution.Title || !layer.visibility) {
+            return copyrights;
+        }
+        if (showThemeCopyrightOnly) {
+            if (layer.role === LayerRole.THEME) {
+                copyrights[layer.attribution.OnlineResource || layer.attribution.Title] = layer.attribution.OnlineResource ? layer.attribution.Title : null;
+            }
+        } else if (layer.role === LayerRole.BACKGROUND) {
+            const mapScale = MapUtils.computeForZoom(map.scales, map.zoom);
+            if (LayerUtils.layerScaleInRange(layer, mapScale)) {
+                copyrights[layer.attribution.OnlineResource || layer.attribution.Title] = layer.attribution.OnlineResource ? layer.attribution.Title : null;
+            }
+        } else {
+            if (!layer.bbox) {
+                return copyrights;
+            }
+            if (!transformedbboxes[layer.bbox.crs]) {
+                transformedbboxes[layer.bbox.crs] = CoordinatesUtils.reprojectBbox(map.bbox.bounds, map.projection, layer.bbox.crs);
+            }
+            const mapbbox = transformedbboxes[layer.bbox.crs];
+            const laybbox = layer.bbox.bounds;
+            if (
+                mapbbox[0] < laybbox[2] && mapbbox[2] > laybbox[0] &&
+                mapbbox[1] < laybbox[3] && mapbbox[3] > laybbox[1]
+            ) {
+                // Extents overlap
+                copyrights[layer.attribution.OnlineResource || layer.attribution.Title] = layer.attribution.OnlineResource ? layer.attribution.Title : null;
+            }
+        }
+        return copyrights;
     }
 };
 

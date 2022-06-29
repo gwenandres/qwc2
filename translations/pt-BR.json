@@ -8,6 +8,7 @@
         "AttributeTable": "",
         "DxfExport": "Exportar DXF",
         "Editing": "Editando",
+        "FeatureForm": "",
         "Help": "Ajuda",
         "IdentifyRegion": "Identificar zona",
         "LayerCatalog": "",
@@ -81,15 +82,18 @@
       "symbologyscale": "Escala de simbología:"
     },
     "editing": {
+      "add": "",
       "attrtable": "",
       "canceldelete": "Não apagues",
       "capturedpicture": "",
       "clearpicture": "",
       "commit": "Comprometer-se",
+      "create": "",
       "delete": "Excluir",
       "discard": "Descartar",
       "draw": "Desenhar",
       "feature": "Recurso",
+      "geomreadonly": "",
       "maximize": "Maximizar",
       "minimize": "Minimizar",
       "nocompatpick": "",
@@ -100,6 +104,12 @@
       "relationcommitfailed": "",
       "select": "Selecione",
       "takepicture": ""
+    },
+    "featureform": {
+      "feature": "",
+      "noresults": "",
+      "querying": "",
+      "title": ""
     },
     "fileselector": {
       "placeholder": "Selecione ficheiro..."
@@ -162,6 +172,12 @@
       "transparency": "Transparência",
       "visiblefilter": "Filtrar camadas invisíveis",
       "zoomtolayer": "Ampliar a camada"
+    },
+    "linkfeatureform": {
+      "cancel": "",
+      "close": "",
+      "drawhint": "",
+      "pickhint": ""
     },
     "locate": {
       "feetUnit": "pés",
@@ -308,6 +324,7 @@
       "markers": "",
       "notemporaldata": "",
       "play": "",
+      "playrev": "",
       "rewind": "",
       "stepback": "",
       "stepfwd": "",
@@ -316,8 +333,11 @@
       "title": "",
       "toggle": "",
       "unit": {
+        "century": "",
         "days": "",
+        "decade": "",
         "hours": "",
+        "milliseconds": "",
         "minutes": "",
         "months": "",
         "seconds": "",

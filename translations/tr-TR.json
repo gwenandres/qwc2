@@ -8,6 +8,7 @@
         "AttributeTable": "",
         "DxfExport": "DXF'e Veri Aktar",
         "Editing": "Düzenleme",
+        "FeatureForm": "",
         "Help": "Yardım",
         "IdentifyRegion": "Bölgeden Bilgi Al",
         "LayerCatalog": "",
@@ -81,15 +82,18 @@
       "symbologyscale": "Sembol Ölçeği:"
     },
     "editing": {
+      "add": "",
       "attrtable": "",
       "canceldelete": "Silme",
       "capturedpicture": "",
       "clearpicture": "",
       "commit": "Onayla",
+      "create": "",
       "delete": "Sil",
       "discard": "İptal",
       "draw": "Çiz",
       "feature": "Obje",
+      "geomreadonly": "",
       "maximize": "Büyült",
       "minimize": "Küçült",
       "nocompatpick": "",
@@ -100,6 +104,12 @@
       "relationcommitfailed": "",
       "select": "Seçim",
       "takepicture": ""
+    },
+    "featureform": {
+      "feature": "",
+      "noresults": "",
+      "querying": "",
+      "title": ""
     },
     "fileselector": {
       "placeholder": "Dosya seç..."
@@ -162,6 +172,12 @@
       "transparency": "",
       "visiblefilter": "Görünmeyen katmanları filtrele",
       "zoomtolayer": "Katman sınırlarına yaklaş"
+    },
+    "linkfeatureform": {
+      "cancel": "",
+      "close": "",
+      "drawhint": "",
+      "pickhint": ""
     },
     "locate": {
       "feetUnit": "feet",
@@ -308,6 +324,7 @@
       "markers": "",
       "notemporaldata": "",
       "play": "",
+      "playrev": "",
       "rewind": "",
       "stepback": "",
       "stepfwd": "",
@@ -316,8 +333,11 @@
       "title": "",
       "toggle": "",
       "unit": {
+        "century": "",
         "days": "",
+        "decade": "",
         "hours": "",
+        "milliseconds": "",
         "minutes": "",
         "months": "",
         "seconds": "",

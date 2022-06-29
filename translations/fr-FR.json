@@ -8,6 +8,7 @@
         "AttributeTable": "Table d'attributs",
         "DxfExport": "Export DXF",
         "Editing": "Editer",
+        "FeatureForm": "",
         "Help": "Aide",
         "IdentifyRegion": "Interroger la région",
         "LayerCatalog": "Catalogue des couches",
@@ -81,15 +82,18 @@
       "symbologyscale": "Echelle"
     },
     "editing": {
+      "add": "",
       "attrtable": "Table",
       "canceldelete": "Annuler la suppression",
       "capturedpicture": "",
       "clearpicture": "",
       "commit": "Appliquer",
+      "create": "",
       "delete": "Supprimer",
       "discard": "Rejeter",
       "draw": "Dessiner",
       "feature": "Objet",
+      "geomreadonly": "",
       "maximize": "Maximiser",
       "minimize": "Minimiser",
       "nocompatpick": "Aucune géométrie compatible trouvée",
@@ -100,6 +104,12 @@
       "relationcommitfailed": "Certaines relations n'ont pas pu être enregistrées. Pour plus de détails consulter le boutons d'informations",
       "select": "Sélectionner",
       "takepicture": "Ajouter une photo"
+    },
+    "featureform": {
+      "feature": "",
+      "noresults": "",
+      "querying": "",
+      "title": ""
     },
     "fileselector": {
       "placeholder": "Choisir un fichier..."
@@ -162,6 +172,12 @@
       "transparency": "Transparence",
       "visiblefilter": "Filtrer couches invisibles",
       "zoomtolayer": "Zoomer sur la couche"
+    },
+    "linkfeatureform": {
+      "cancel": "",
+      "close": "",
+      "drawhint": "",
+      "pickhint": ""
     },
     "locate": {
       "feetUnit": "pieds",
@@ -307,6 +323,7 @@
       "animationinterval": "",
       "notemporaldata": "Aucune couche temporelle n'est visible sur la carte.",
       "play": "Jouer",
+      "playrev": "",
       "rewind": "",
       "stepback": "",
       "stepfwd": "",
@@ -315,8 +332,11 @@
       "title": "",
       "toggle": "",
       "unit": {
+        "century": "",
         "days": "jours",
+        "decade": "",
         "hours": "heures",
+        "milliseconds": "",
         "minutes": "minutes",
         "months": "mois",
         "seconds": "secondes",

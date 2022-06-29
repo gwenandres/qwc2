@@ -8,6 +8,7 @@
         "AttributeTable": "Tabela de atribute",
         "DxfExport": "Export DXF",
         "Editing": "Editare",
+        "FeatureForm": "",
         "Help": "Ajutor",
         "IdentifyRegion": "Interogare regiune",
         "LayerCatalog": "Catalog",
@@ -81,15 +82,18 @@
       "symbologyscale": "Scara simboluri:"
     },
     "editing": {
+      "add": "",
       "attrtable": "",
       "canceldelete": "Elimină modificările",
       "capturedpicture": "",
       "clearpicture": "Elimină poza",
       "commit": "Salvează",
+      "create": "",
       "delete": "Șterge",
       "discard": "Renunță",
       "draw": "Adaugă",
       "feature": "Entitate",
+      "geomreadonly": "",
       "maximize": "Maximizează",
       "minimize": "Minimizează",
       "nocompatpick": "",
@@ -100,6 +104,12 @@
       "relationcommitfailed": "Salvarea relației a eșuat",
       "select": "Selectează",
       "takepicture": "Fotografiază"
+    },
+    "featureform": {
+      "feature": "",
+      "noresults": "",
+      "querying": "",
+      "title": ""
     },
     "fileselector": {
       "placeholder": "Selectează fișierul"
@@ -162,6 +172,12 @@
       "transparency": "Transparență",
       "visiblefilter": "Filtrează straturile invizibile",
       "zoomtolayer": "Zoom la strat"
+    },
+    "linkfeatureform": {
+      "cancel": "",
+      "close": "",
+      "drawhint": "",
+      "pickhint": ""
     },
     "locate": {
       "feetUnit": "picioare",
@@ -308,6 +324,7 @@
       "markers": "",
       "notemporaldata": "",
       "play": "",
+      "playrev": "",
       "rewind": "",
       "stepback": "",
       "stepfwd": "",
@@ -316,8 +333,11 @@
       "title": "",
       "toggle": "",
       "unit": {
+        "century": "",
         "days": "",
+        "decade": "",
         "hours": "",
+        "milliseconds": "",
         "minutes": "",
         "months": "",
         "seconds": "",
