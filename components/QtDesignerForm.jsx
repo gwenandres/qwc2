@@ -227,7 +227,7 @@ class QtDesignerForm extends React.Component {
         } else if (widget.class === "QTextEdit" || widget.class === "QTextBrowser" || widget.class === "QPlainTextEdit") {
             if (this.props.report) {
                 return (<div className="qt-designer-form-textarea">{value}</div>);
-            } else if (readOnly && prop.useHtml === "true") {
+            } else if (inputConstraints.readOnly && prop.useHtml === "true") {
                 return (<div className="html-text" dangerouslySetInnerHTML={{__html: value}}></div>);
             } else {
                 return (<textarea name={elname} onChange={(ev) => updateField(widget.name, ev.target.value)} {...inputConstraints} style={fontStyle} value={value} />);
