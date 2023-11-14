@@ -71,7 +71,7 @@ class TopBar extends React.Component {
         let logo;
         const assetsPath = ConfigUtils.getAssetsPath();
         const tooltip = LocaleUtils.tr("appmenu.menulabel");
-        if (this.props.mobile) {
+        if (this.props.mobile || this.props.appMenuVisibleOnHover) {
             buttonContents = (
                 <span className="appmenu-button">
                     <Icon className="appmenu-icon" icon="menu-hamburger" title={tooltip}/>
