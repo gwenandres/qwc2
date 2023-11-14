@@ -11,6 +11,7 @@ div.sidebar {
     display: flex;
     flex-direction: column;
     max-width: 100vw;
+    border-radius: 5px;
 }
 
 div.sidebar-right {
@@ -19,6 +20,7 @@ div.sidebar-right {
 
 .appmenu-compact div.sidebar-right {
     right: 3.7em;
+    top: 3.7em;
 }
 
 div.sidebar-left {
