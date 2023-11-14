@@ -31,8 +31,8 @@ class AppMenu extends React.Component {
         currentTaskBlocked: PropTypes.bool,
         currentTheme: PropTypes.object,
         keepMenuOpen: PropTypes.bool,
+        menuCompact: PropTypes.bool,
         menuItems: PropTypes.array,
-        menuOpenOnHover: PropTypes.bool,
         onMenuToggled: PropTypes.func,
         openExternalUrl: PropTypes.func,
         setCurrentTask: PropTypes.func,
@@ -270,7 +270,7 @@ class AppMenu extends React.Component {
         const className = classnames({
             "appmenu-blocked": this.props.currentTaskBlocked,
             "appmenu-visible": visible,
-            "appmenu-compact": this.props.menuOpenOnHover
+            "appmenu-compact": this.props.menuCompact
         });
         const filter = removeDiacritics(this.state.filter.toLowerCase());
         return (

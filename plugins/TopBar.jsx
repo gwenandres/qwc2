@@ -29,12 +29,12 @@ class TopBar extends React.Component {
     static propTypes = {
         /** Whether opening the app menu clears the active task. */
         appMenuClearsTask: PropTypes.bool,
+        /** Whether show an appMenu compact (menu visible on icons hover) */
+        appMenuCompact: PropTypes.bool,
         /** Whether to display the filter field in the app menu. */
         appMenuFilterField: PropTypes.bool,
         /** The shortcut for tiggering the app menu, i.e. alt+shift+m. */
         appMenuShortcut: PropTypes.string,
-        /** Whether to open the app menu on hover on visible icons. */
-        appMenuVisibleOnHover: PropTypes.bool,
         /** Whether to open the app menu on application startup. */
         appMenuVisibleOnStartup: PropTypes.bool,
         components: PropTypes.object,
@@ -71,7 +71,7 @@ class TopBar extends React.Component {
         let logo;
         const assetsPath = ConfigUtils.getAssetsPath();
         const tooltip = LocaleUtils.tr("appmenu.menulabel");
-        if (this.props.mobile || this.props.appMenuVisibleOnHover) {
+        if (this.props.mobile || this.props.appMenuCompact) {
             buttonContents = (
                 <span className="appmenu-button">
                     <Icon className="appmenu-icon" icon="menu-hamburger" title={tooltip}/>
@@ -100,10 +100,10 @@ class TopBar extends React.Component {
         const searchOptions = {...this.props.searchOptions};
         searchOptions.minScaleDenom = searchOptions.minScaleDenom || searchOptions.minScale;
         delete searchOptions.minScale;
-        // Keep menu open when appMenu is Visible on Hover
-        const keepMenuOpen = this.props.appMenuVisibleOnHover;
-        // Menu should be visible on startup when appMenu is Visible on Hover
-        const showOnStartup = this.props.appMenuVisibleOnStartup || this.props.appMenuVisibleOnHover;
+        // Keep menu open when appMenu is in compact mode (Visible on Hover)
+        const keepMenuOpen = this.props.appMenuCompact;
+        // Menu should be visible on startup when appMenu is in compact mode (Visible on Hover)
+        const showOnStartup = this.props.appMenuVisibleOnStartup || this.props.appMenuCompact;
         return (
             <Swipeable
                 onSwipedDown={() => this.props.toggleFullscreen(false)}
@@ -127,8 +127,8 @@ class TopBar extends React.Component {
                             appMenuShortcut={this.props.appMenuShortcut}
                             buttonContents={buttonContents}
                             keepMenuOpen={keepMenuOpen}
+                            menuCompact={this.props.appMenuCompact}
                             menuItems={this.props.menuItems}
-                            menuOpenOnHover={this.props.appMenuVisibleOnHover}
                             openExternalUrl={this.openUrl}
                             showFilterField={this.props.appMenuFilterField}
                             showOnStartup={showOnStartup} />
