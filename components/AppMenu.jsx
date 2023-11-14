@@ -270,7 +270,7 @@ class AppMenu extends React.Component {
         const className = classnames({
             "appmenu-blocked": this.props.currentTaskBlocked,
             "appmenu-visible": visible,
-            "appmenu-onhover": this.props.menuOpenOnHover
+            "appmenu-compact": this.props.menuOpenOnHover
         });
         const filter = removeDiacritics(this.state.filter.toLowerCase());
         return (
