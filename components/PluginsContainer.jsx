@@ -33,17 +33,22 @@ class PluginsContainer extends React.Component {
             return (<Plugin key={pluginConf.name + idx} {...cfg} {...appCfg} />);
         });
     };
+    isAppMenuCompact = (pluginsConfig)=> {
+        const pluginTopBar = pluginsConfig.find((pluginConf) => pluginConf.name === "TopBar");
+        return pluginTopBar && pluginTopBar.cfg.appMenuCompact;
+    };
     render() {
         if (this.props.pluginsConfig) {
+            const className = this.isAppMenuCompact(this.props.pluginsConfig[this.props.mode]) ? "appmenu-compact" : "";
             return (
-                <div id="PluginsContainer" className="appmenu-compact">
+                <div className={className} id="PluginsContainer" >
                     {this.renderPlugins(this.props.pluginsConfig[this.props.mode])}
                     <WindowManager />
                 </div>
             );
         }
         return null;
-    }
+    };
 }
 
 export default connect((state) => ({
