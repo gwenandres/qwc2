@@ -53,13 +53,16 @@ div.AppMenu div.appmenu-menu-container {
 }
 
 div.AppMenu.appmenu-onhover div.appmenu-menu-container {
-    right: -11.5em !important;
-    width: 15em !important;
-    transition: transform 0.25s, opacity 0.25s, right 0.5s !important;
+    right: -11.5em;
+    width: 15em;
+    height: 100vh;
+    transition: transform 0.25s, opacity 0.25s, right 0.5s;
+    background: var(--app-menu-bg-color);
+    box-shadow: 0px 0px 4px rgba(136, 136, 136, 0.5)
 }
 
 div.AppMenu.appmenu-onhover div.appmenu-menu-container:hover {
-    right: 0 !important;
+    right: 0;
 }
 
 div.AppMenu ul.appmenu-menu {

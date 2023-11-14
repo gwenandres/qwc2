@@ -36,7 +36,7 @@ class PluginsContainer extends React.Component {
     render() {
         if (this.props.pluginsConfig) {
             return (
-                <div id="PluginsContainer">
+                <div id="PluginsContainer" className="appmenu-compact">
                     {this.renderPlugins(this.props.pluginsConfig[this.props.mode])}
                     <WindowManager />
                 </div>

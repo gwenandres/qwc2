@@ -17,6 +17,10 @@ div.sidebar-right {
     right: 0;
 }
 
+.appmenu-compact div.sidebar-right {
+    right: 3.7em;
+}
+
 div.sidebar-left {
     left: 0;
 }
