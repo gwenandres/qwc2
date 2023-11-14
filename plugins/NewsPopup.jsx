@@ -41,7 +41,6 @@ export default class NewsPopup extends React.Component {
         return (
             <div className="newspopup-dialog-container">
                 <div className="newspopup-dialog-popup">
-                    <div className="newspopup-dialog-popup-title"><span>{LocaleUtils.tr("newspopup.title")}</span><Icon icon="remove" onClick={this.closeDialog} /></div>
                     <div className="newspopup-dialog-popup-body">
                         <iframe src={this.props.newsDocument} />
                         <div className="newspopup-dialog-popup-buttonbar">
