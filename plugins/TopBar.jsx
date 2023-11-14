@@ -100,6 +100,8 @@ class TopBar extends React.Component {
         const searchOptions = {...this.props.searchOptions};
         searchOptions.minScaleDenom = searchOptions.minScaleDenom || searchOptions.minScale;
         delete searchOptions.minScale;
+        // Keep menu open when appMenu is Visible on Hover
+        const keepMenuOpen = this.props.appMenuVisibleOnHover;
         return (
             <Swipeable
                 onSwipedDown={() => this.props.toggleFullscreen(false)}
@@ -122,8 +124,9 @@ class TopBar extends React.Component {
                             appMenuClearsTask={this.props.appMenuClearsTask}
                             appMenuShortcut={this.props.appMenuShortcut}
                             buttonContents={buttonContents}
-                            keepMenuOpenShowOnHover={this.props.appMenuVisibleOnHover}
+                            keepMenuOpen={keepMenuOpen}
                             menuItems={this.props.menuItems}
+                            menuOpenOnHover={this.props.appMenuVisibleOnHover}
                             openExternalUrl={this.openUrl}
                             showFilterField={this.props.appMenuFilterField}
                             showOnStartup={this.props.appMenuVisibleOnStartup} />
