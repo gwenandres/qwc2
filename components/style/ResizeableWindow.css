@@ -6,11 +6,17 @@ div.resizeable-window-container {
     right: 0;
     pointer-events: none;
 }
+
+.appmenu-compact div.resizeable-window-container {
+    right: 3.7em;
+}
+
 div.resizeable-window {
     pointer-events: auto;
     background-color: var(--container-bg-color);
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.75);
     z-index: 8;
+    border-radius: 5px;
 }
 
 div.resizeable-window-maximized {
@@ -96,6 +102,8 @@ div.resizeable-window-titlebar {
     user-select: none;
     padding: 0 0.25em;
     flex: 0 0 auto;
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 4px solid var(--titlebar-border-bottom-color);
 }
 
 span.resizeable-window-titlebar-icon {

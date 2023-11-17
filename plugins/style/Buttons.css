@@ -51,3 +51,7 @@ button.map-button.locate-button-LOCATING > div.spinner {
     width: 1.5em;
     height: 1.5em;
 }
+
+.appmenu-compact button.map-button {
+    right: 4em !important;
+}

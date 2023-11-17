@@ -9,15 +9,17 @@ div.newspopup-dialog-container {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background: url(/media/bg_splashscreen.png) left top; */
 }
 
 div.newspopup-dialog-popup {
-    flex: 0 0 75%;
+    flex: 0 0 50%;
     height: 66%;
     background-color: var(--container-bg-color);
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.55);
     display: flex;
     flex-direction: column;
+    border-radius: 5px;
 }
 
 div.newspopup-dialog-popup-title {
@@ -58,7 +60,6 @@ div.newspopup-dialog-popup-body > iframe {
 }
 
 div.newspopup-dialog-popup-body > div.newspopup-dialog-popup-buttonbar {
-    border-top: 1px solid var(--border-color);
     flex: 0 0 auto;
     text-align: center;
 }
